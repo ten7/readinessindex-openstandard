@@ -1,0 +1,23 @@
+# Notice
+
+The AI Readiness Index: an open standard, created by TEN7 (https://ten7.com).
+
+Everything in this repository (the standard, the registry, the crosswalk, the
+schema, the build script and the documentation) is licensed under the
+
+    Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)
+
+    Deed:      https://creativecommons.org/licenses/by-sa/4.0/
+    Full text: the `LICENSE` file, and https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+In plain terms: copy it, adapt it, build your own scanner from it, for any
+purpose including commercial ones, free and for good, as long as you credit TEN7
+as the creator of the AI Readiness Index and license what you build from it under
+these same terms.
+
+The license covers the text, not the name. Anyone may say their tool implements
+the AI Readiness Index version N. Nobody may use the name to suggest that TEN7 or
+this project endorses a product.
+
+Scanners that compute a score from this standard are separate software and are
+not part of it.
