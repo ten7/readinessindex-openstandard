@@ -1,0 +1,34 @@
+name: Propose a test
+description: Suggest something a machine needs from a website that the standard does not yet measure.
+title: "Propose: "
+labels: ["proposal"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What does a machine need?
+      description: The question the test would ask, in plain words, for somebody who has never read the standard.
+    validations:
+      required: true
+  - type: textarea
+    id: signal
+    attributes:
+      label: What can be observed from outside?
+      description: The signal on a site that answers it.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What is the evidence?
+      description: A source that is not you, ideally the documentation of a search engine, an AI company or a standards body, that says something uses this. If you found none, say so.
+    validations:
+      required: true
+  - type: dropdown
+    id: fixer
+    attributes:
+      label: Who would typically fix it?
+      multiple: true
+      options: [Site owner, Content team, Search specialist, Front-end developer, Back-end developer, Operations]
+    validations:
+      required: true

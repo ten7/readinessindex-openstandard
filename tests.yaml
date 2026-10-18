@@ -1,0 +1,1052 @@
+# The AI Readiness Index: test registry
+#
+# Mirrors AI-READINESS-INDEX.md (Index 12). The document is the source of truth; the
+# tests in tests/ parse its appendix table and fail if this file drifts from it. A weight
+# is never changed here without a major version bump.
+#
+# presets: which reduced runs a test belongs to. `quick` is the single-page scan: the
+# tests that can be answered from one page and the site's front-door files. A preset
+# changes which tests run, never how any of them is scored.
+#
+# License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), see LICENSE.
+# Scanners that read this file are separate software and are not part of the standard.
+
+index_version: "12.0"
+
+# The day this version took effect. Every result carries both, so an
+# old report cannot silently start meaning something new when the
+# Index changes underneath it.
+index_date: "2026-11-02"
+
+# Four scored categories. Posture, Extras and Measurement are reported beside
+# them and never scored: a test with a `tier` of posture, extras or measurement.
+dimensions:
+  - id: 1
+    name: "Reach"
+    weight: 25
+  - id: 2
+    name: "Read"
+    weight: 35
+  - id: 3
+    name: "Understand"
+    weight: 25
+  - id: 4
+    name: "Act"
+    weight: 15
+
+
+
+checks:
+  # --- RCH ---
+  - id: RCH-1
+    title: "Can the AI tools that search the web read your site?"
+    dimension: 1
+    weight: 8
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: true
+    presets: [quick]
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RCH-2
+    title: "Does your website let those crawlers in, or does your security turn them away?"
+    dimension: 1
+    weight: 12
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: true
+    presets: [quick]
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RCH-3
+    title: "Does each page say which web address is the real one?"
+    dimension: 1
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: [quick]
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RCH-4
+    title: "Do your page settings let assistants quote you?"
+    dimension: 1
+    weight: 3
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: [quick]
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- RED ---
+  - id: RED-1
+    title: "Is your page's text in the page itself, without needing JavaScript?"
+    dimension: 2
+    weight: 10
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-2
+    title: "Is the text behind tabs and 'read more' buttons already on the page?"
+    dimension: 2
+    weight: 5
+    applicability: conditional
+    precondition: site_has_disclosure_widgets
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-3
+    title: "Can a crawler trust the 'last changed' dates in your sitemap?"
+    dimension: 2
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: 3
+    unattested_ceiling: null
+
+  - id: RED-4
+    title: "Do your filters and calendars keep a crawler from getting lost?"
+    dimension: 2
+    weight: 1
+    applicability: conditional
+    precondition: site_has_search_or_filtering
+    requires: null
+    verification: auto-partial
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-5
+    title: "Do your PDFs and images have their own rules for search and quoting?"
+    dimension: 2
+    weight: 1
+    applicability: conditional
+    precondition: site_serves_non_html_resources
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-6
+    title: "Do missing pages say they are missing?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-7
+    title: "Do your redirects go straight to the right page?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-8
+    title: "Do you have sitemaps for your images and videos?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-9
+    title: "Can a crawler reach page two, three and beyond without clicking a button?"
+    dimension: 2
+    weight: 1
+    applicability: conditional
+    precondition: site_has_pagination
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-10
+    title: "Do you offer a plain-text (Markdown) copy of your pages?"
+    dimension: 2
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-11
+    title: "Does each page tell machines where its Markdown copy is?"
+    dimension: 2
+    weight: 1
+    applicability: conditional
+    precondition: null
+    requires: {check: "RED-10", min_band: 2}
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-12
+    title: "If a machine asks for Markdown, does your site give it?"
+    dimension: 2
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-13
+    title: "Is the page built from real page parts, like header, main and navigation?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-14
+    title: "Do your headings follow in order, starting from one main heading?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-15
+    title: "Are your tables real tables, with header cells?"
+    dimension: 2
+    weight: 1
+    applicability: conditional
+    precondition: sample_contains_tables
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-16
+    title: "Does every section heading have a link that will not change?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    unattested_ceiling: null
+
+  - id: RED-17
+    title: "Do your images have descriptions for people who cannot see them?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-18
+    title: "Are your key facts written as text, not only inside images or PDFs?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: RED-19
+    title: "Does each page give its answer near the top?"
+    dimension: 2
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- UND ---
+  - id: UND-1
+    title: "Does your site say clearly who you are?"
+    dimension: 3
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-2
+    title: "Does your site use the page labels that search engines still read for what you publish?"
+    dimension: 3
+    weight: 3
+    applicability: vertical
+    precondition: null
+    requires: null
+    verification: auto
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-3
+    title: "Do the prices and availability in your page code match what the page shows?"
+    dimension: 3
+    weight: 3
+    applicability: conditional
+    precondition: site_has_commercial_offers
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-4
+    title: "Does each article show who wrote it, with a page about the author?"
+    dimension: 3
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-5
+    title: "Does the author label in your page code point to that person?"
+    dimension: 3
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-6
+    title: "Are your published and updated dates honest and visible?"
+    dimension: 3
+    weight: 6
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: 3
+    unattested_ceiling: null
+
+  - id: UND-7
+    title: "Does each page show where it sits in your site?"
+    dimension: 3
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-8
+    title: "Does your hidden page code say the same thing as the visible text?"
+    dimension: 3
+    weight: 1
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-9
+    title: "If a page is behind a paywall, does it say so?"
+    dimension: 3
+    weight: 2
+    applicability: conditional
+    precondition: site_has_paywall
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-10
+    title: "Does your page code link to your official profiles elsewhere?"
+    dimension: 3
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: UND-11
+    title: "Does your page code pass a validity check?"
+    dimension: 3
+    weight: 2
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- ACT ---
+  - id: ACT-1
+    title: "Can an AI agent tell what each form field is for?"
+    dimension: 4
+    weight: 5
+    applicability: conditional
+    precondition: site_has_public_forms
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: ACT-2
+    title: "Can an AI agent browse and search without hitting a CAPTCHA?"
+    dimension: 4
+    weight: 3
+    applicability: conditional
+    precondition: site_has_search_or_filtering
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: ACT-3
+    title: "If you have a public API, is it described in a standard file?"
+    dimension: 4
+    weight: 2
+    applicability: conditional
+    precondition: site_has_public_api
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: ACT-4
+    title: "Do your buttons, links and menus have names an AI agent can read?"
+    dimension: 4
+    weight: 5
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- PST ---
+  - id: PST-1
+    title: "Which AI training crawlers have you allowed or blocked?"
+    tier: posture
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: PST-2
+    title: "Have you posted a Content Signals statement about what AI may do with your content?"
+    tier: posture
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: PST-3
+    title: "Have you published a license for AI use of your content?"
+    tier: posture
+    weight: 0
+    applicability: conditional
+    precondition: client_holds_licensable_content
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: PST-4
+    title: "Have you reserved your text and data mining rights in a form machines can read?"
+    tier: posture
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: PST-5
+    title: "Do your statements about AI use agree with each other?"
+    tier: posture
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: PST-6
+    title: "Is your site switched on for Google's AI answers?"
+    tier: posture
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: manual
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- EXT ---
+  - id: EXT-1
+    title: "Do you publish an llms.txt file for coding assistants?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-2
+    title: "Do you list your APIs and agent tools where agents look for them?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: site_exposes_agent_capability
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-3
+    title: "If you run your own crawler or agent, do you publish its signing keys?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: client_operates_agents
+    requires: null
+    verification: auto-partial
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-4
+    title: "Can an AI assistant connect to your site as a tool?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-5
+    title: "Is your page code one connected description of your organization?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-6
+    title: "Is your page code generated from your content rather than typed by hand?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: 3
+
+  - id: EXT-7
+    title: "If you run real question-and-answer pages, are they marked as such?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: site_has_qa_content
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-8
+    title: "Does sensitive content, like health, legal or money advice, name who reviewed it?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: client_publishes_ymyl_content
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-9
+    title: "Does your page code point to the sources you cite?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: client_publishes_research_or_policy
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-10
+    title: "Do your images carry proof of where they came from?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: client_produces_original_assets
+    requires: null
+    verification: auto
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-11
+    title: "Have you marked the part of a page that answers a spoken question?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-12
+    title: "Do you tell search engines the moment a page changes?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: 3
+
+  - id: EXT-13
+    title: "Can an assistant ask your site a question directly?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-14
+    title: "Does your site offer its actions to AI browsers as tools?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-15
+    title: "Can an AI agent find out how to sign in to your site?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: site_has_public_api
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-16
+    title: "Do you publish a card or a skills list for the agents you run?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-17
+    title: "Do you list your agents in your domain's DNS records?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-18
+    title: "Do you tell AI shoppers how they can pay?"
+    tier: extras
+    weight: 0
+    applicability: conditional
+    precondition: site_has_commercial_offers
+    requires: null
+    verification: auto-partial
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-19
+    title: "Does robots.txt say where your sitemap is?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: EXT-20
+    title: "Can an AI browser see the controls on your page?"
+    tier: extras
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  # --- MSR ---
+  - id: MSR-1
+    title: "Can people finish key tasks without relying on JavaScript-only clicks?"
+    tier: measurement
+    weight: 0
+    applicability: conditional
+    precondition: client_declared_critical_flows
+    requires: null
+    verification: auto-partial
+    effort: large
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-2
+    title: "Can you count visits that come from AI assistants?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: manual
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-3
+    title: "Do you keep your crawler logs long enough to use them?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: manual
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-4
+    title: "Do you get a regular report on AI crawler visits?"
+    tier: measurement
+    weight: 0
+    applicability: conditional
+    precondition: null
+    requires: {check: "MSR-3", min_band: 2}
+    verification: manual
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-5
+    title: "Do you ask AI assistants the same questions every month and keep the answers?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: manual
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-6
+    title: "Have you measured how accurately an AI reads your page?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: manual
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null
+
+  - id: MSR-7
+    title: "Are you set up in Google Search Console and Bing Webmaster Tools, and do you read their AI reports?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto-partial
+    effort: small
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: 3
+
+  - id: MSR-8
+    title: "Does your page hold still while it loads?"
+    tier: measurement
+    weight: 0
+    applicability: always
+    precondition: null
+    requires: null
+    verification: auto
+    effort: medium
+    gate: false
+    presets: []
+    first_run_cap: null
+    unattested_ceiling: null

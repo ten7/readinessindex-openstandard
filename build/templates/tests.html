@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% import "partials.html" as p with context %}
+{% block head %}<script type="application/json" id="legacy-map">{{ legacy_map }}</script>{% endblock %}
+{% block content %}
+<div class="wrap">
+  <header class="pagehead">
+    <p class="eyebrow">The tests</p>
+    <h1>All {{ n_tests }} tests, {{ n_scored }} of them worth points</h1>
+    <p class="lede">What a machine needs from a website, in plain questions. The {{ n_scored }} scored tests
+      add up to 100 points; {{ n_beside }} more are measured and shown beside the score and never change it. Open any
+      test for why it matters and the sources behind it.</p>
+  </header>
+  <div class="page">
+    {{ p.rail(rail, 'Categories') }}
+    <div>
+      <form class="tools" data-filter role="search" onsubmit="return false">
+        <label class="sr-only" for="q">Search the tests</label>
+        <input id="q" type="search" name="q" placeholder="Search by question, ID or role" autocomplete="off">
+        <label for="ev">Evidence</label>
+        <select id="ev" name="evidence"><option value="">Any</option>{% for l in evidence_labels %}<option>{{ l }}</option>{% endfor %}</select>
+        <label for="sc">Show</label>
+        <select id="sc" name="scope"><option value="">All tests</option><option value="yes">Scored</option><option value="no">Not scored</option></select>
+        <output aria-live="polite"></output>
+      </form>
+      {% for g in groups %}
+      <section class="group{% if not g.scored %} group--beside{% endif %}" id="{{ g.key }}" aria-labelledby="{{ g.key }}-h">
+        <div class="group__head">
+          <span class="group__no" aria-hidden="true">{{ '%02d' % g.number if g.number else '·' }}</span>
+          <h2 id="{{ g.key }}-h">{{ g.name }}</h2>
+          <span class="group__pts">{% if g.scored %}{{ g.tests|length }} tests · {{ g.points }} points{% else %}{{ g.tests|length }} items · not scored{% endif %}</span>
+        </div>
+        {% if g.why %}<p class="group__why">{{ g.why }}</p>{% elif prompts.get(g.name) %}<p class="group__why">{{ prompts[g.name] }}</p>{% endif %}
+        {% for t in g.tests %}
+        <article class="test" id="{{ t.id|lower }}" data-scored="{{ 'yes' if t.scored else 'no' }}" data-evidence="{{ t.evidence }}"
+          data-search="{{ (t.id ~ ' ' ~ t.question ~ ' ' ~ t.fixed_by|join(' '))|lower }}">
+          <div>
+            <span class="test__id"><a href="#{{ t.id|lower }}">{{ t.id }}</a></span>
+            <span class="test__pts">{% if t.scored %}{{ t.weight }} {{ 'pt' if t.weight == 1 else 'pts' }}{% else %}not scored{% endif %}</span>
+          </div>
+          <div>
+            <h3 class="test__q">{{ t.question }}</h3>
+            <div class="test__row">
+              {{ p.chip(t) }}
+              {% if t.gate %}<span class="chip chip--gate" title="A gate is reported beside the score, not as a ceiling on it">Gate</span>{% endif %}
+              {% if t.applicability != 'always' %}<span class="chip chip--plain">Conditional</span>{% endif %}
+              {% for r in t.fixed_by %}<span class="chip chip--plain" title="{{ 'Does or drives the work' if loop.first else 'Also needed' }}">{{ r }}</span>{% endfor %}
+            </div>
+            <details class="test__more">
+              <summary>Why it matters, sources and review</summary>
+              <div class="test__body">
+                <p>{{ t.description }}</p>
+                <p>{% if t.source.url %}<a href="{{ t.source.url }}">{{ t.source.name }}</a>{% else %}{{ t.source.name }}{% endif %}{% if t.source.why %}: {{ t.source.why }}{% endif %}</p>
+                <dl>
+                  <dt>Evidence</dt><dd>{{ t.evidence }}{% if t.evidence_note %} ({{ t.evidence_note }}){% endif %}</dd>
+                  <dt>Sources</dt>
+                  <dd><ul>{% for s in t.sources %}<li>{% if s.url %}<a href="{{ s.url }}">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}, {{ s.date }}<span class="grade" title="Source grade">{{ s.grade }}</span></li>{% endfor %}</ul></dd>
+                  <dt>Review by</dt><dd>{{ t.review_by }}</dd>
+                  {% if t.replaces %}<dt>Was</dt><dd>{% for o in t.replaces %}<a href="/evidence/#v11-{{ o|lower|replace('.', '-') }}">{{ o }}</a>{% if not loop.last %}, {% endif %}{% endfor %} in Index 11</dd>{% endif %}
+                  <dt>Full entry</dt><dd><a href="/standard/#{{ t.id|lower }}">Detection, bands and fix, in the standard</a></dd>
+                </dl>
+              </div>
+            </details>
+          </div>
+        </article>
+        {% endfor %}
+      </section>
+      {% endfor %}
+      <section class="doc" id="rounding" style="margin-top:1rem;border-top:2px solid var(--ink);padding-top:2rem">
+        <h2 style="margin:0 0 1rem;border:0;padding:0">How the points add up, and where they round</h2>
+        <p>Each test scores a band from 0 to 4. What it contributes is its weight times its band, divided by four, so a test worth 2
+          at band 3 contributes exactly 1.5 points. The score is every contribution added at full precision, divided by the
+          100 points above, and rounded once at the end.</p>
+        <p>Every points figure a report shows is a whole number, because a report is meant to be read aloud and nobody argues about
+          three quarters of a point. That means the rows of a report will not add up to the score on it: roughly a third of them
+          round up or down to get there. Both figures are right, and the score is always computed from the exact ones, never from
+          the rounded ones.</p>
+        <p>A report should let the reader check that. The accounting, with every test, its band, the arithmetic written out and the
+          final division, shows nothing rounded.</p>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}

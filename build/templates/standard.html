@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import "partials.html" as p with context %}
+{% block head %}<script type="application/json" id="legacy-map">{{ legacy_map }}</script>{% endblock %}
+{% block progress %}<div class="progress" data-progress aria-hidden="true"><span></span></div>{% endblock %}
+{% block content %}
+<div class="wrap">
+  <header class="pagehead">
+    <p class="eyebrow">The standard</p>
+    <h1>The AI Readiness Index</h1>
+    <ul class="meta">
+      <li><strong>Version</strong> {{ version }}</li>
+      <li><strong>Effective</strong> {{ date_human }}</li>
+      <li><a href="#versioning-and-change-control">Changelog</a></li>
+      <li><a href="/standard.md">Markdown</a></li>
+      <li>CC BY-SA 4.0</li>
+    </ul>
+  </header>
+  <div class="page">
+    {{ p.rail(toc, 'Contents') }}
+    <article class="doc">{{ body }}</article>
+  </div>
+</div>
+{% endblock %}

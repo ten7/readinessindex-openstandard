@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.className = "";</script>
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ base }}{{ path }}">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The AI Readiness Index: an open standard">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ base }}{{ path }}">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v={{ asset_v }}">
+<link rel="alternate" type="text/markdown" href="/standard.md" title="The standard as Markdown">
+{% block head %}{% endblock %}
+{% if jsonld %}<script type="application/ld+json">{{ jsonld }}</script>{% endif %}
+<script src="/assets/site.js?v={{ asset_v }}" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to the content</a>
+{% block progress %}{% endblock %}
+<header class="masthead">
+  <div class="masthead__in">
+    <a class="mark" href="/" aria-label="The AI Readiness Index, an open standard: home">
+      <span class="mark__name">The AI Readiness Index</span>
+      <span class="mark__kind">An open standard</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {% for item in nav %}<a href="{{ item.href }}"{% if item.id == page_id %} aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
+      <a class="nav__ext" href="{{ repo }}">GitHub</a>
+    </nav>
+  </div>
+</header>
+<main id="content">
+{% block content %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__cols">
+      <div>
+        <h2>The standard</h2>
+        <ul>
+          <li><a href="/standard/">Read the standard</a></li>
+          <li><a href="/tests/">All {{ n_tests }} tests</a></li>
+          <li><a href="/evidence/">Evidence and sources</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Take part</h2>
+        <ul>
+          <li><a href="/contribute/">How to contribute</a></li>
+          <li><a href="{{ repo }}/issues">Issues</a></li>
+          <li><a href="{{ repo }}/discussions">Discussions</a></li>
+          <li><a href="{{ repo }}">Source on GitHub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Use it</h2>
+        <ul>
+          <li><a href="/data/">Data and files</a></li>
+          <li><a href="/tests.json">tests.json</a></li>
+          <li><a href="/standard.md">standard.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <ul>
+          <li><a href="/about/">About this standard</a></li>
+          <li><a href="/about/#license">License: CC BY-SA 4.0</a></li>
+          <li><a href="/about/#provenance">Who made it</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__prov" id="provenance">
+      <div>
+        <p><strong>This is an open standard, not a product.</strong> It was created by TEN7 and is published under
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Anyone may read it, implement it
+          and propose changes, and a score computed from it can be reproduced from what is written here.</p>
+        <p>TEN7 is the company that created the standard, and readinessindex.io is a product of TEN7: a scanner that
+          implements it. They are linked so you know where the standard came from, not as a recommendation. This site
+          does not depend on either.</p>
+      </div>
+      <ul class="foot__links">
+        <li><a class="ext" href="https://ten7.com">TEN7</a><span>The company that created and maintains the standard.</span></li>
+        <li><a class="ext" href="https://readinessindex.io">readinessindex.io</a><span>A product of TEN7: a scanner that implements the standard. One of many possible.</span></li>
+      </ul>
+    </div>
+    <div class="foot__legal">
+      <span>Version {{ version }} · effective {{ date_human }}</span>
+      <span>Text and data: CC BY-SA 4.0</span>
+      <span>No cookies, no analytics.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

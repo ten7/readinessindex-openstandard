@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question or float an idea
+    url: https://github.com/ten7/readinessindex-openstandard/discussions
+    about: Discussions are the place for questions and ideas that are not yet proposals.

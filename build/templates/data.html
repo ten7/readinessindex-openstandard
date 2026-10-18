@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrap">
+  <header class="pagehead">
+    <p class="eyebrow">Use it</p>
+    <h1>Data and files</h1>
+    <p class="lede">The standard is a document and a registry. Both are published as plain files at stable addresses, so a
+      scanner, a report or a reader can use them without asking anybody.</p>
+  </header>
+  <div class="page page--single" style="padding-bottom:5rem">
+    <div>
+      <ul class="files">
+        {% for name, what in files %}<li><code><a href="/{{ name }}">{{ name }}</a></code><span>{{ what }}</span></li>{% endfor %}
+      </ul>
+      <p style="margin-top:2rem;max-width:var(--measure)">Everything here is licensed
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>: credit TEN7 as the creator of the AI
+        Readiness Index and license what you build the same way. Version {{ version }}, effective {{ date_human }}.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

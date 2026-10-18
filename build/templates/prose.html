@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "partials.html" as p with context %}
+{% block content %}
+<div class="wrap">
+  <header class="pagehead">
+    <p class="eyebrow">{{ eyebrow }}</p>
+    <h1>{{ heading }}</h1>
+    {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
+    {% if meta %}<ul class="meta">{% for m in meta %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+  </header>
+  <div class="page{% if not toc %} page--single{% endif %}">
+    {% if toc %}{{ p.rail(toc, 'Contents') }}{% endif %}
+    <article class="doc">{{ body }}</article>
+  </div>
+</div>
+{% endblock %}

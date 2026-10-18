@@ -1,0 +1,21 @@
+{% macro chip(test) -%}
+{%- set tone = tones.get(test.evidence, 'none') -%}
+<span class="chip chip--{{ tone }}" title="Evidence label">{{ test.evidence }}{% if test.evidence_note %} <span class="sr-only">{{ test.evidence_note }}</span>{% endif %}</span>
+{%- endmacro %}
+
+{% macro rail(items, label='On this page') -%}
+<nav class="rail" aria-label="{{ label }}">
+  <p class="rail__title">{{ label }}</p>
+  <ol>
+    {% for slug, text, extra, sub in items %}
+    <li{% if sub %} class="sub"{% endif %}><a href="#{{ slug }}">{{ text }}{% if extra %}<span>{{ extra }}</span>{% endif %}</a></li>
+    {% endfor %}
+  </ol>
+</nav>
+<details class="rail-m">
+  <summary>{{ label }}</summary>
+  <ol>
+    {% for slug, text, extra, sub in items %}<li><a href="#{{ slug }}">{{ text }}</a></li>{% endfor %}
+  </ol>
+</details>
+{%- endmacro %}

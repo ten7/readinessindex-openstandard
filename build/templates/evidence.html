@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "partials.html" as p with context %}
+{% block content %}
+<div class="wrap">
+  <header class="pagehead">
+    <p class="eyebrow">Evidence</p>
+    <h1>What backs every test</h1>
+    <p class="lede">An evidence label and graded sources for each of the {{ n_tests }} tests, with the date each is next
+      re-read, and the map from Index 11 to Index 12.</p>
+    <div class="dl-row">
+      <a class="btn btn--ghost" href="/evidence.csv">evidence.csv</a>
+      <a class="btn btn--ghost" href="/evidence.json">evidence.json</a>
+      <a class="btn btn--ghost" href="/crosswalk.json">crosswalk.json</a>
+    </div>
+  </header>
+  <div class="page">
+    {{ p.rail(toc, 'On this page') }}
+    <div>
+      <section class="doc" id="how-to-read" style="max-width:none">
+        <h2 style="margin-top:0;border-top:0;padding-top:0">How to read the evidence</h2>
+        <div style="max-width:var(--measure)">{{ guide }}</div>
+      </section>
+      <section id="register" style="margin-top:3.5rem">
+        <h2>The register</h2>
+        <div class="table-wrap table-wrap--flush">
+          <table class="table">
+            <caption class="sr-only">Every test with its evidence label, points, number of sources and review date</caption>
+            <thead><tr><th scope="col">Test</th><th scope="col">Question</th><th scope="col">Evidence</th><th scope="col" class="num">Pts</th><th scope="col" class="num">Sources</th><th scope="col">Review by</th></tr></thead>
+            <tbody>
+              {% for t in tests %}
+              <tr><td class="id"><a href="/tests/#{{ t.id|lower }}">{{ t.id }}</a></td><td class="q">{{ t.question }}</td><td>{{ p.chip(t) }}</td>
+                <td class="num">{% if t.scored %}{{ t.weight }}{% else %}–{% endif %}</td><td class="num">{{ t.sources|length }}</td><td style="white-space:nowrap">{{ t.review_by }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="crosswalk" style="margin-top:3.5rem">
+        <h2>The crosswalk from Index 11</h2>
+        <p style="max-width:var(--measure)">An Index 11 ID never stops resolving. Every one maps here to what it became, and a retired
+          test keeps its row so that &ldquo;what happened to AIR-1.5&rdquo; has an answer. {{ new_in_v12|length }} tests in Index 12 have no
+          predecessor.</p>
+        <div class="table-wrap table-wrap--flush">
+          <table class="table">
+            <caption class="sr-only">Index 11 test IDs and the Index 12 tests they became</caption>
+            <thead><tr><th scope="col">Index 11</th><th scope="col">Became in Index 12</th></tr></thead>
+            <tbody>
+              {% for row in crosswalk %}
+              <tr id="v11-{{ row.v11|lower|replace('.', '-') }}"><td class="id">{{ row.v11 }}</td>
+                <td>{% if row.retired %}<span class="chip chip--none">Retired</span>{% else %}{% for t in row.targets %}<a href="/tests/#{{ t.id|lower }}">{{ t.id }}</a>{% if not t.scored %} <span class="chip chip--plain">not scored</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:1.5rem;max-width:var(--measure)"><strong>New in Index 12:</strong>
+          {% for i in new_in_v12 %}<a href="/tests/#{{ i|lower }}">{{ i }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}

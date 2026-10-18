@@ -1,0 +1,96 @@
+# The permanent crosswalk from Index 11 test IDs to Index 12 test IDs.
+#
+# An Index 11 ID names a dimension that no longer exists, and a stored result, a
+# bookmarked report, an exported backlog and somebody's ticket all quote it. So an
+# old ID never stops resolving: each maps here to what it became, scored target
+# first. An empty list is a retired test and keeps its row, so "what happened to
+# AIR-1.5" has an answer. A new ID is never reused for something else.
+#
+# Where several old tests became one, the first is the one whose logic the new test
+# inherits and the others are folded into it.
+
+v11_to_v12:
+  AIR-1.1: [RCH-1, PST-1]
+  AIR-1.2: [RCH-2]
+  AIR-1.3: [RCH-2]
+  AIR-1.4: [PST-2]
+  AIR-1.5: []
+  AIR-1.6: [RCH-4]
+  AIR-1.7: [RCH-3]
+  AIR-1.8: [RED-13]
+  AIR-1.9: [RED-14]
+  AIR-1.10: [EXT-1]
+  AIR-1.11: [EXT-5]
+  AIR-1.12: [UND-10]
+  AIR-1.13: [UND-1]
+  AIR-2.1: [RED-1]
+  AIR-2.2: [RED-2]
+  AIR-2.3: [RED-15]
+  AIR-2.4: [RED-16]
+  AIR-2.5: [RED-17]
+  AIR-2.6: [RED-18]
+  AIR-3.1: [EXT-6]
+  AIR-3.2: [UND-7]
+  AIR-3.3: [UND-2]
+  AIR-3.4: [EXT-7]
+  AIR-3.5: [UND-9]
+  AIR-3.6: [UND-3]
+  AIR-3.7: []
+  AIR-3.8: [UND-11]
+  AIR-4.1: [PST-3]
+  AIR-4.2: [PST-3]
+  AIR-4.3: [EXT-3]
+  AIR-4.4: [RED-5]
+  AIR-4.5: [RED-6]
+  AIR-4.6: [RED-7]
+  AIR-4.7: [RED-4]
+  AIR-4.8: [RED-3]
+  AIR-4.9: [RED-8]
+  AIR-4.10: [RED-9]
+  AIR-5.1: [UND-4]
+  AIR-5.2: [UND-5]
+  AIR-5.3: [EXT-8]
+  AIR-5.4: [UND-6]
+  AIR-5.5: [EXT-9]
+  AIR-5.6: [EXT-10]
+  AIR-6.1: [ACT-3]
+  AIR-6.2: [EXT-2]
+  AIR-6.3: [ACT-1]
+  AIR-6.4: [ACT-2]
+  AIR-7.1: [RED-10]
+  AIR-7.2: [RED-11]
+  AIR-7.3: [RED-12]
+  AIR-7.4: [RED-12]
+  LI-1: []
+  LI-2: [EXT-11]
+  LI-3: [EXT-12]
+  LI-4: []
+  LI-5: [EXT-13]
+  LI-6: [EXT-4]
+  LI-7: [EXT-1]
+  BP-1: [MSR-1]
+  BP-2: []
+  BP-3: [MSR-2]
+  BP-4: []
+  BP-5: [MSR-3]
+  BP-6: [MSR-4]
+  BP-7: [MSR-5]
+  BP-8: [MSR-6]
+  BP-9: [MSR-7]
+
+# Tests with no Index 11 predecessor.
+new_in_v12:
+  - RED-19
+  - UND-8
+  - ACT-4
+  - PST-4
+  - PST-5
+  - PST-6
+  - EXT-14
+  - EXT-15
+  - EXT-16
+  - EXT-17
+  - EXT-18
+  - EXT-19
+  - EXT-20
+  - MSR-8

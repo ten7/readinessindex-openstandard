@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% import "partials.html" as p with context %}
+{% block content %}
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Open standard · Version {{ version }}</p>
+      <h1>Can machines find, read, trust and use your website?</h1>
+      <p class="lede">The AI Readiness Index is a public standard for answering that question: {{ n_tests }} tests,
+        one hundred points, and every claim tied to someone who is not us. Free to read, to implement and to challenge.</p>
+      <div class="hero__actions">
+        <a class="btn" href="/standard/">Read the standard</a>
+        <a class="btn btn--ghost" href="/tests/">Browse the {{ n_tests }} tests</a>
+      </div>
+    </div>
+    <aside class="specimen" aria-label="An example test">
+      <p class="specimen__label"><span>One test, as published</span><span class="specimen__id">{{ specimen.id }}</span></p>
+      <h2 class="specimen__q">{{ specimen.question }}</h2>
+      <div class="specimen__row">
+        {{ p.chip(specimen) }}
+        <span class="chip chip--gate">Gate</span>
+        <span class="chip chip--plain">{{ specimen.weight }} points</span>
+        {% for r in specimen.fixed_by %}<span class="chip chip--plain">{{ r }}</span>{% endfor %}
+      </div>
+      <p class="specimen__why">{{ specimen.description }}</p>
+      <p class="specimen__src">Source: <a href="{{ specimen.source.url }}">{{ specimen.source.name }}</a>. Review by {{ specimen.review_by }}.</p>
+    </aside>
+  </section>
+  <ul class="facts" aria-label="The standard at a glance">
+    <li><span class="facts__n">{{ version }}</span><span class="facts__l">Version</span></li>
+    <li><span class="facts__n">{{ date_short }}</span><span class="facts__l">Effective</span></li>
+    <li><span class="facts__n">{{ n_scored }}</span><span class="facts__l">Scored tests</span></li>
+    <li><span class="facts__n">100</span><span class="facts__l">Points available</span></li>
+    <li><span class="facts__n">{{ n_beside }}</span><span class="facts__l">Measured, never scored</span></li>
+    <li><span class="facts__n">CC BY-SA</span><span class="facts__l">License</span></li>
+  </ul>
+</div>
+
+<section class="band" aria-labelledby="score">
+  <div class="wrap">
+    <div class="band__head">
+      <p class="eyebrow">The score</p>
+      <h2 id="score">One hundred points, four questions, asked in order</h2>
+      <p>Each category answers one thing a machine needs before it can use your site. The weights are published,
+        every one is a whole number, and a change to any of them is a new major version.</p>
+    </div>
+    <div class="weights" role="img" aria-label="{% for g in scored_groups %}{{ g.name }} {{ g.points }} points{% if not loop.last %}, {% endif %}{% endfor %}">
+      {% for g in scored_groups %}<div class="weights__seg" style="flex: {{ g.points }}"><span class="weights__name">{{ g.name }}</span><span class="weights__pts">{{ g.points }} pts</span></div>{% endfor %}
+    </div>
+    <ol class="cats">
+      {% for g in scored_groups %}
+      <li>
+        <h3>{{ g.name }}<span>{{ g.tests|length }} tests</span></h3>
+        <p>{{ prompts[g.name] }}</p>
+        <a href="/tests/#{{ g.key }}">See the tests</a>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="band band--tint" aria-labelledby="evidence">
+  <div class="wrap">
+    <div class="band__head">
+      <p class="eyebrow">Evidence, not opinion</p>
+      <h2 id="evidence">A test earns points only if something is documented using it</h2>
+      <p>Every test carries an evidence label and graded sources, and is re-read every six months. Where we found no
+        documented reader, the test is still measured and shown, but it is worth nothing and a site is never
+        marked down for lacking it.</p>
+    </div>
+    <ul class="evbars" aria-label="Scored points by evidence label">
+      {% for label, pts in evidence_points %}
+      <li><span>{{ label }}</span><span class="evbars__bar"><span style="width: {{ pts }}%"></span></span><span class="evbars__n">{{ pts }} pts</span></li>
+      {% endfor %}
+    </ul>
+    <p style="margin-top:1.5rem"><a href="/evidence/">See every source and review date</a></p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="beside">
+  <div class="wrap">
+    <div class="band__head">
+      <p class="eyebrow">Beside the score</p>
+      <h2 id="beside">Three groups that are measured and never scored</h2>
+    </div>
+    <div class="beside">
+      {% for g in beside_groups %}
+      <div>
+        <h3>{{ g.name }}</h3>
+        <p>{{ g.why }}</p>
+        <span class="count">{{ g.tests|length }} items</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint" aria-labelledby="take-part">
+  <div class="wrap">
+    <div class="band__head">
+      <p class="eyebrow">Take part</p>
+      <h2 id="take-part">The standard is changed in public</h2>
+      <p>Propose a test, correct a citation or challenge a weight. Every accepted change is recorded in the
+        changelog, and anything that moves a score is a new major version that says plainly old and new numbers
+        cannot be compared.</p>
+    </div>
+    <div class="take">
+      <div><h3>Propose a test</h3><p>Describe what a machine needs, the signal that shows it and a source that is not
+        us. Open an issue.</p><a class="btn btn--ghost" href="{{ repo }}/issues/new/choose">Open an issue</a></div>
+      <div><h3>Talk it through</h3><p>Questions, disagreements and half-formed ideas belong in Discussions, before
+        they are proposals.</p><a class="btn btn--ghost" href="{{ repo }}/discussions">Join the discussion</a></div>
+      <div><h3>Send a change</h3><p>The whole standard is one Markdown file and one registry. Pull requests are
+        checked automatically.</p><a class="btn btn--ghost" href="/contribute/">How contributing works</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="neutral">
+  <div class="wrap neutral">
+    <div>
+      <p class="eyebrow">About this standard</p>
+      <h2 id="neutral">An open standard, not a product</h2>
+      <p>The AI Readiness Index was created by TEN7 and is published here under a license that lets anyone copy it,
+        adapt it and build a scanner from it. It does not belong to any scanner. A score is a number you can
+        reproduce from the text on this site.</p>
+      <p>TEN7 is the company behind the standard, and readinessindex.io is a product of TEN7: a scanner that
+        implements it. They are linked so you can see where the standard came from, not to recommend them.
+        <a href="/about/">Read more about how it is run.</a></p>
+    </div>
+    <ul class="who">
+      <li><a class="ext" href="https://ten7.com"><strong>TEN7</strong></a><span>The company that created the standard and maintains it with outside contributors.</span></li>
+      <li><a class="ext" href="https://readinessindex.io"><strong>readinessindex.io</strong></a><span>A product of TEN7: a scanner that implements the standard. It is one implementation, not the standard.</span></li>
+    </ul>
+  </div>
+</section>
+{% endblock %}
