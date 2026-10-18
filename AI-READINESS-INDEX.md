@@ -1,7 +1,7 @@
 # The AI Readiness Index
 
 **Version 12.0 — specification**
-Effective 2026-11-02.
+Effective 2026-10-18.
 Repository: [ten7/readinessindex-openstandard](https://github.com/ten7/readinessindex-openstandard)
 
 **License:** This document and the tests it defines are published under
@@ -473,7 +473,7 @@ A scored test must not rest on a grade C source alone. A source whose address or
 ### Policy
 
 - **A test is scored only if it has documented use.** That means the AI product or Search index label, or the Practice label, which is scored at one point and shown as Practice. A test labeled Standard only, Scanner-listed or None found is measured and shown in Posture, Extras or Measurement, and is worth no points. A site that does it is credited in words and is never marked down for not doing it.
-- **Every test carries a review date six months out.** The date is on the test's **Review by** line: 2027-05-02 for the tests as published in 12.0. A test is also re-read when a source it cites moves, changes or disappears, and it is changed if the reading changed.
+- **Every test carries a review date six months out.** The date is on the test's **Review by** line: 2027-04-18 for the tests as published in 12.0. A test is also re-read when a source it cites moves, changes or disappears, and it is changed if the reading changed.
 - **A label that moves a test into or out of the score is a change to the score,** and follows *Versioning and change control*. A corrected citation or a reworded question is a minor change.
 
 ---
@@ -520,7 +520,7 @@ These four tests can each be answered from a single page and the site's front-do
 - **Fix:** Remove inherited blocks. Keep only directives the client can explain.
 - **What changed in 12.0:** Names each company's search crawler (adds Claude-SearchBot, Googlebot, bingbot, Applebot, MistralAI-Index, meta-webindexer, Amzn-SearchBot). Training crawlers no longer cost points. Points: 5 in 11.5, 8 in 12.0.
 - **Replaces:** AIR-1.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RCH-2 — Does your website let those crawlers in, or does your security turn them away?
 
@@ -547,7 +547,7 @@ These four tests can each be answered from a single page and the site's front-do
 - **Fix:** Audit Cloudflare bot settings, Pantheon AGCDN rules, Fastly VCL and origin WAF. Scope challenges to `POST` endpoints and authenticated routes. Verify by re-running this probe, not by reading configuration.
 - **What changed in 12.0:** Absorbs the challenge-page check. Reads Cloudflare's Search, Agent and Training settings where they can be seen. Points: 6 in 11.5, 12 in 12.0.
 - **Replaces:** AIR-1.2, AIR-1.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RCH-3 — Does each page say which web address is the real one?
 
@@ -566,7 +566,7 @@ These four tests can each be answered from a single page and the site's front-do
 - **Fix:** Emit a self-referencing canonical by default and correct the exceptions.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 2, unchanged from 11.5.
 - **Replaces:** AIR-1.7
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RCH-4 — Do your page settings let assistants quote you?
 
@@ -588,7 +588,7 @@ These four tests can each be answered from a single page and the site's front-do
 - **Fix:** Remove the directives from pages you want cited. They are almost always left over from a legacy SEO module or a staging template.
 - **What changed in 12.0:** Rewritten around Google, Bing and Apple, and now also catches noindex and a zero snippet length. noarchive is live for Bing. Points: 1 in 11.5, 3 in 12.0.
 - **Replaces:** AIR-1.6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## #2 · Read · 19 tests · 35 pts
 
@@ -621,7 +621,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Server-render or statically render. For decoupled Drupal this is the largest line item in most remediations.
 - **What changed in 12.0:** Measures the share of words missing from the first response instead of pass or fail. Points: 6 in 11.5, 10 in 12.0.
 - **Replaces:** AIR-2.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-2 — Is the text behind tabs and 'read more' buttons already on the page?
 
@@ -642,7 +642,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Render all panels and hide with CSS, never by removing the text. Give infinite scroll a paginated fallback.
 - **What changed in 12.0:** Asks for visible on load, not only present. Points: 3 in 11.5, 5 in 12.0.
 - **Replaces:** AIR-2.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-3 — Can a crawler trust the 'last changed' dates in your sitemap?
 
@@ -663,7 +663,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Wire `lastmod` to the node's changed timestamp, not to cron.
 - **What changed in 12.0:** Bing ties sitemap dates to how fast updates reach AI answers, which is why the test stays in the score. Points: 2, unchanged from 11.5.
 - **Replaces:** AIR-4.8
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-4 — Do your filters and calendars keep a crawler from getting lost?
 
@@ -683,7 +683,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Combine disallow patterns, `noindex` on parameterized views, and canonicals back to the base listing.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-4.7
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-5 — Do your PDFs and images have their own rules for search and quoting?
 
@@ -703,7 +703,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Set headers by path pattern at the CDN or web server.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-4.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-6 — Do missing pages say they are missing?
 
@@ -723,7 +723,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Return real status codes. Use `410` for content that is permanently gone.
 - **What changed in 12.0:** Citation updated; the claim is limited to wasted visits. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-4.5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-7 — Do your redirects go straight to the right page?
 
@@ -744,7 +744,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Flatten the redirect table so every source points at its final destination.
 - **What changed in 12.0:** Citation updated to Google's ten-hop limit. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-4.6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-8 — Do you have sitemaps for your images and videos?
 
@@ -765,7 +765,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Generate image and video sitemaps from the media library and submit them to both search consoles.
 - **What changed in 12.0:** The claim that splitting a sitemap by content type helps is dropped. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-4.9
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-9 — Can a crawler reach page two, three and beyond without clicking a button?
 
@@ -784,7 +784,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Prefer a view-all canonical where page weight allows, and give every list ordinary next-page links.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-4.10
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-10 — Do you offer a plain-text (Markdown) copy of your pages?
 
@@ -803,7 +803,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Generate from the same source as the HTML. Strip nav, promos and cookie banners.
 - **What changed in 12.0:** Follows the address the page advertises, not only the page address plus .md. Points: 2, unchanged from 11.5.
 - **Replaces:** AIR-7.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-11 — Does each page tell machines where its Markdown copy is?
 
@@ -822,7 +822,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Add the link to the head template or send it as a response header. A file nobody can find is not much use.
 - **What changed in 12.0:** Reads the response headers as well as the link in the page. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-7.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-12 — If a machine asks for Markdown, does your site give it?
 
@@ -846,7 +846,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Serve Markdown on request from the canonical address, set `Vary: Accept`, and set TTLs and invalidation to the same cache tags as the source content.
 - **What changed in 12.0:** Absorbs the caching test. Points: 4 in 11.5, 2 in 12.0.
 - **Replaces:** AIR-7.3, AIR-7.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-13 — Is the page built from real page parts, like header, main and navigation?
 
@@ -866,7 +866,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Replace structural divs with `article`, `section`, `nav`, `aside`, `figure` and `dl`.
 - **What changed in 12.0:** Weight cut; labeled Practice. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-1.8
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-14 — Do your headings follow in order, starting from one main heading?
 
@@ -887,7 +887,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Move the site name out of `h1`. Fix skips in the templates, not the content.
 - **What changed in 12.0:** Weight cut; the claim is softened to a correlation. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-1.9
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-15 — Are your tables real tables, with header cells?
 
@@ -908,7 +908,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Fix the tables that carry facts first. Convert layout tables to CSS.
 - **What changed in 12.0:** Weight cut; labeled Practice. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-2.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-16 — Does every section heading have a link that will not change?
 
@@ -929,7 +929,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Derive IDs from heading text, not render order.
 - **What changed in 12.0:** The check that IDs stay the same across scans is dropped; it had no evidence. Points: 2 in 11.5, 1 in 12.0. The scanner reads one scan and does not compare IDs between runs.
 - **Replaces:** AIR-2.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-17 — Do your images have descriptions for people who cannot see them?
 
@@ -949,7 +949,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Audit existing content, then make the field required in the media entity so the problem stops recurring.
 - **What changed in 12.0:** Labeled Practice. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-2.5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-18 — Are your key facts written as text, not only inside images or PDFs?
 
@@ -970,7 +970,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Fix:** Publish an HTML equivalent. Keep the PDF as a download, not as the source of truth.
 - **What changed in 12.0:** Reworded to 'harder to find and quote'. Anthropic's tool does read PDFs. Points: 1, unchanged from 11.5.
 - **Replaces:** AIR-2.6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### RED-19 — Does each page give its answer near the top?
 
@@ -990,7 +990,7 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Note:** Provisional. The scanner reads the first paragraphs of the main text, so a title, a date and a navigation prompt never add up to a sentence, and reports medium confidence because eight words is a proxy for an answer. It is the test most likely to be reworked or dropped after the pilot. If it is dropped, its point moves to RED-1.
 - **Fix:** Start each page with the answer, in a sentence or two. Put what the page is about, in plain sentences, before the navigation prompts, the long introduction and the fine print.
 - **What changed in 12.0:** New in 12.0, at one point. It has no v11 predecessor.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## #3 · Understand · 11 tests · 25 pts
 
@@ -1017,7 +1017,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Thin About pages are a persistent weakness for nonprofits and institutions. Do not leave the key facts in an annual-report PDF.
 - **What changed in 12.0:** Cites Google's Organization documentation. Points: 2, unchanged from 11.5. The list of facts now names all seven the bands count; 11.5 listed six and banded on seven.
 - **Replaces:** AIR-1.13
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-2 — Does your site use the page labels that search engines still read for what you publish?
 
@@ -1054,7 +1054,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Pick the applicable set deliberately. Do not implement types the content does not support.
 - **What changed in 12.0:** Re-scoped to types Google still supports; retired types no longer count. Points: 4 in 11.5, 3 in 12.0.
 - **Replaces:** AIR-3.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-3 — Do the prices and availability in your page code match what the page shows?
 
@@ -1075,7 +1075,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Source the markup value from the same field the page renders.
 - **What changed in 12.0:** Compares the markup with the visible page. A private merchant feed cannot be seen from outside, so the v11 'current price' claim and any feed comparison are dropped. Points: 1 in 11.5, 3 in 12.0.
 - **Replaces:** AIR-3.6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-4 — Does each article show who wrote it, with a page about the author?
 
@@ -1096,7 +1096,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** A byline string asserts nothing. A page about the person does.
 - **What changed in 12.0:** Counts each author once. Credentials become a bonus, not a requirement. Points: 2, unchanged from 11.5.
 - **Replaces:** AIR-5.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-5 — Does the author label in your page code point to that person?
 
@@ -1116,7 +1116,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Where the author is a department, name the department and model it as an entity.
 - **What changed in 12.0:** Accepts a link or profile as well as an ID. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-5.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-6 — Are your published and updated dates honest and visible?
 
@@ -1137,7 +1137,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Wire both dates to the node's own timestamps and show them on the page. A deploy must not move them.
 - **What changed in 12.0:** Citation moves to Google's publication-dates page. Points: 2 in 11.5, 6 in 12.0.
 - **Replaces:** AIR-5.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-7 — Does each page show where it sits in your site?
 
@@ -1157,7 +1157,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Generate from the menu, not by hand.
 - **What changed in 12.0:** Required only where your site has sections. A trail need not match the address. Points: 2 in 11.5, 1 in 12.0.
 - **Replaces:** AIR-3.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-8 — Does your hidden page code say the same thing as the visible text?
 
@@ -1177,7 +1177,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Note:** It compares against the page title, the headings and the first 6,000 characters of main text, so a title that appears only far down a very long page can still be missed. A title written as "Page | Site" counts when its longer part is on the page. It reports medium confidence.
 - **Fix:** Generate the markup and the page from the same field.
 - **What changed in 12.0:** New in 12.0, at one point. It has no v11 predecessor.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-9 — If a page is behind a paywall, does it say so?
 
@@ -1198,7 +1198,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Add `isAccessibleForFree: false` and the gated section's selector to every paywalled page.
 - **What changed in 12.0:** Apple documents it. The 'about' and 'mentions' part is dropped. Points: 1 in 11.5, 2 in 12.0.
 - **Replaces:** AIR-3.5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### UND-10 — Does your page code link to your official profiles elsewhere?
 
@@ -1219,7 +1219,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Claim the Wikidata item. For universities, ROR is free and takes a day.
 - **What changed in 12.0:** It was unscored in the first 12.0 draft and moved into the score as an Understand test, at 2 points, because Google documents `sameAs` as a recommended Organization property. It carried 2 points in 11.5 as AIR-1.12. Band 4 no longer needs the links fetched.
 - **Replaces:** AIR-1.12
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 
 ### UND-11 — Does your page code pass a validity check?
@@ -1241,7 +1241,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Fix:** Validate in the build and fix what the validator reports.
 - **What changed in 12.0:** It was unscored in the first 12.0 draft and moved into the score as an Understand test, at 2 points, because Google documents that invalid markup is not eligible for its features. It carried 2 points in 11.5 as AIR-3.8.
 - **Replaces:** AIR-3.8
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## #4 · Act · 4 tests · 15 pts
 
@@ -1268,7 +1268,7 @@ Act asks whether an agent can do something on the site. The evidence is real and
 - **Fix:** The same change satisfies WCAG. Easy joint justification.
 - **What changed in 12.0:** Autocomplete is dropped; no source shows agents use it. Points: 2 in 11.5, 5 in 12.0.
 - **Replaces:** AIR-6.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### ACT-2 — Can an AI agent browse and search without hitting a CAPTCHA?
 
@@ -1288,7 +1288,7 @@ Act asks whether an agent can do something on the site. The evidence is real and
 - **Fix:** Scope challenges to form submissions and logins. Searching and filtering do not need one.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 2 in 11.5, 3 in 12.0. The test now applies only where the site has search or filtering. In the Index 12 pilot 113 of 180 sites had no search or filter surface in the sample and each had been given full marks for it, which made this the cheapest three points in the Index; a client report still shows band 4, "nothing to fix", for a site with none, and the census leaves the test out of the sites it does not apply to. A site that has search or filtering that the scan could not try is held at band 2.
 - **Replaces:** AIR-6.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### ACT-3 — If you have a public API, is it described in a standard file?
 
@@ -1309,7 +1309,7 @@ Act asks whether an agent can do something on the site. The evidence is real and
 - **Fix:** Publish the OpenAPI description, version it, and link it from the developer pages.
 - **What changed in 12.0:** Applies only if you have a public API. Points: 2, unchanged from 11.5.
 - **Replaces:** AIR-6.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### ACT-4 — Do your buttons, links and menus have names an AI agent can read?
 
@@ -1328,7 +1328,7 @@ Act asks whether an agent can do something on the site. The evidence is real and
 - **Bands:** Default coverage rubric over the pages measured, where a page counts as present and correct when at most 1% of its controls have no name. A site where no page's controls could be measured is not judged: the test is N/A with the reason insufficient evidence.
 - **Fix:** Give an icon-only button or link an `aria-label` or visible text, and give each menu control the name its heading or label already carries. The same change satisfies WCAG, which makes it an easy joint justification.
 - **What changed in 12.0:** New test. Added after the first draft, because Act had three tests and carried five points, and forms and CAPTCHAs were all it measured. Points: 5 in 12.0. A page passes at 1% unnamed controls and not 5%: the Index 12 pilot (180 S&P 500 sites) gave 121 of 166 sites full marks at 5% and 74 at 1%, with the bands spread from 0 to 4.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## Coverage of published scanners
 
@@ -1393,7 +1393,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Fix:** Nothing to fix. If the choice was never made on purpose, make it now, and say the same thing everywhere (PST-5).
 - **What changed in 12.0:** Training crawlers are reported as your choice. The report also says which tools acting on a person's request may ignore robots.txt, and lists xAI's Grok crawlers as observed but undocumented.
 - **Replaces:** AIR-1.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### PST-2 — Have you posted a Content Signals statement about what AI may do with your content?
 
@@ -1414,7 +1414,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Fix:** Run the policy conversation with the site owner, then add the line.
 - **What changed in 12.0:** Moved out of the score: no company is documented honoring it. It carried 3 points in 11.5 and carries none now.
 - **Replaces:** AIR-1.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### PST-3 — Have you published a license for AI use of your content?
 
@@ -1437,7 +1437,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Fix:** Decide terms with the site owner first. The XML is the easy half. Then add the license reference to feed generation and to the markup field mapping.
 - **What changed in 12.0:** Two tests merge into one. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-4.1, AIR-4.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### PST-4 — Have you reserved your text and data mining rights in a form machines can read?
 
@@ -1457,7 +1457,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Note:** Provisional. The first release reads that the file, the header and the tag are there, and does not validate the file's contents against the protocol. It is shown as the site's choice and never scored: no consumer is documented.
 - **Fix:** Declare your text and data mining position in TDMRep, in the file and in the header, and make it match PST-2.
 - **What changed in 12.0:** New in 12.0, shown and never scored. It has no v11 predecessor.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### PST-5 — Do your statements about AI use agree with each other?
 
@@ -1477,7 +1477,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Note:** The comparison covers `robots.txt`, Content Signals, TDMRep (the `tdm-reservation` header and meta tag, which carry its value), the RSL file and `llms-full.txt`. It does not read the value inside `tdmrep.json`. The contradictions it names are Content Signals against `Disallow` rules, against a reservation and against a published `llms-full.txt`, and a reservation against a published `llms-full.txt`.
 - **Fix:** Decide the position once, then express it the same way in `robots.txt`, response headers and page tags.
 - **What changed in 12.0:** New in 12.0, shown and never scored. It has no v11 predecessor.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### PST-6 — Is your site switched on for Google's AI answers?
 
@@ -1496,7 +1496,7 @@ Posture is your choices. Which training crawlers you allow, whether you declare 
 - **Note:** It is never scored, because a number should not rest on something a scan cannot check.
 - **Fix:** Open Search Console, find the control for generative AI, and confirm it matches the site owner's decision.
 - **What changed in 12.0:** New in 12.0, shown and never scored. It has no v11 predecessor.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## Extras · 20 items · not scored
 
@@ -1530,7 +1530,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** On Drupal, use the `llms_txt` module with token-driven menus. A hand-written file is stale within a quarter. Publish `/llms-full.txt` only where the licensing position allows it.
 - **What changed in 12.0:** Credited for coding agents only. Merges the full-text version. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-1.10, LI-7
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-2 — Do you list your APIs and agent tools where agents look for them?
 
@@ -1551,7 +1551,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Publish the catalog at the well-known address and point to it from a `Link` header.
 - **What changed in 12.0:** Reads response headers and the api-catalog and ai-catalog files; any one valid entry counts. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-6.2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-3 — If you run your own crawler or agent, do you publish its signing keys?
 
@@ -1572,7 +1572,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** If you operate agents, publish the directory at the well-known address as `application/http-message-signatures-directory+json`, with no redirect, and sign requests with `Signature-Agent`.
 - **What changed in 12.0:** Applies only to sites that run their own agents. It carried 1 point in 11.5 and carries none now. The 11.4 comparison of a signed request with an unsigned one is dropped, because a receiving site only verifies and the signing agent publishes the directory.
 - **Replaces:** AIR-4.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-4 — Can an AI assistant connect to your site as a tool?
 
@@ -1593,7 +1593,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Expose the catalog as a few narrow, typed tools. Document each.
 - **What changed in 12.0:** Moved from Leading Indicators.
 - **Replaces:** LI-6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 **Markup with no documented reader (EXT-5 to EXT-10)**
 
@@ -1616,7 +1616,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Define canonical `@id` URIs once and reference them everywhere.
 - **What changed in 12.0:** Moved out of the score: no documented consumer. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-1.11
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-6 — Is your page code generated from your content rather than typed by hand?
 
@@ -1637,7 +1637,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Map Drupal fields to schema properties through configuration so editors maintain it.
 - **What changed in 12.0:** Moved out of the score. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-3.1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-7 — If you run real question-and-answer pages, are they marked as such?
 
@@ -1657,7 +1657,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Mark up what exists. Do not invent questions to earn the markup.
 - **What changed in 12.0:** FAQ markup is retired; QAPage is kept. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-3.4
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-8 — Does sensitive content, like health, legal or money advice, name who reviewed it?
 
@@ -1677,7 +1677,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Most healthcare and legal clients already run review workflows. The reviewer's identity simply never reaches the page.
 - **What changed in 12.0:** Moved out of the score. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-5.3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-9 — Does your page code point to the sources you cite?
 
@@ -1697,7 +1697,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Credibility that a parser cannot see does not count.
 - **What changed in 12.0:** Moved out of the score. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-5.5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-10 — Do your images carry proof of where they came from?
 
@@ -1718,7 +1718,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Scope this deliberately. It needs signing infrastructure.
 - **What changed in 12.0:** Moved out of the score. It carried 2 points in 11.5 and carries none now.
 - **Replaces:** AIR-5.6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 **Early signals (EXT-11 to EXT-13)**
 
@@ -1741,7 +1741,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Point it at the lede, not the article.
 - **What changed in 12.0:** Detection and bands unchanged.
 - **Replaces:** LI-2
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-12 — Do you tell search engines the moment a page changes?
 
@@ -1763,7 +1763,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Hook submission into the publish workflow rather than a schedule.
 - **What changed in 12.0:** Detection and bands unchanged.
 - **Replaces:** LI-3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-13 — Can an assistant ask your site a question directly?
 
@@ -1784,7 +1784,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Fix:** Stand up the endpoint over structured data you already publish.
 - **What changed in 12.0:** Detection and bands unchanged.
 - **Replaces:** LI-5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-14 — Does your site offer its actions to AI browsers as tools?
 
@@ -1804,7 +1804,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Shown and never scored: it is a preview, no AI product is documented reading it, and a scanner listing it is not a reader. Lighthouse also flags a form that has not been declared and validates a tool's schema; this test counts what is declared and records whether a schema is present.
 - **Fix:** Declare the actions an agent would want, such as search and contact forms, with `toolname` and `tooldescription`, or register them from script, each with a description and an input schema.
 - **What changed in 12.0:** New test, added so that Index 12 measures every check that Cloudflare's Agent Readiness score and Lighthouse's agentic browsing category list. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-15 — Can an AI agent find out how to sign in to your site?
 
@@ -1824,7 +1824,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Applies to sites with a public API. Shown and never scored: no AI product is documented reading it from a site.
 - **Fix:** Publish `/.well-known/oauth-protected-resource` with the resource and its authorization servers, and the server's own metadata at its issuer.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-16 — Do you publish a card or a skills list for the agents you run?
 
@@ -1844,7 +1844,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Shown and never scored: no AI product is documented reading either file from a site. Most sites run no agent and have nothing to publish.
 - **Fix:** If you run an agent, publish its card as JSON at the well-known address; if you offer skills, publish the index with a digest for each.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-17 — Do you list your agents in your domain's DNS records?
 
@@ -1864,7 +1864,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Shown and never scored: an expired draft with no documented reader.
 - **Fix:** Publish an SVCB record for each agent under `_agents` in your domain, signed with DNSSEC, once the draft settles.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-18 — Do you tell AI shoppers how they can pay?
 
@@ -1884,7 +1884,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Applies to sites that sell something. Shown and never scored, and its confidence is low: three of the four protocols are not discoverable from a page that does not ask for payment.
 - **Fix:** If agents may buy from you, publish a Universal Commerce Protocol profile that lists your payment handlers.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-19 — Does robots.txt say where your sitemap is?
 
@@ -1904,7 +1904,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Shown and never scored: Google documents sitemaps, but this test asks only whether one is declared, which RED-3 and RED-8 do not.
 - **Fix:** Add a `Sitemap:` line with the full address to robots.txt.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### EXT-20 — Can an AI browser see the controls on your page?
 
@@ -1924,7 +1924,7 @@ They are numbered within this section rather than inside a category. A global nu
 - **Note:** Shown and never scored: Lighthouse reads this, but no AI product is documented measuring it, and the rules are the accessibility ones people already follow.
 - **Fix:** Remove `aria-hidden` from anything a visitor can press or take it out of the tab order, use only roles ARIA defines, and give each role its parent.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## Measurement · 8 items · not scored
 
@@ -1952,7 +1952,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Run this as a joint engineering and UX audit.
 - **What changed in 12.0:** Detection and bands unchanged.
 - **Replaces:** BP-1
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-2 — Can you count visits that come from AI assistants?
 
@@ -1973,7 +1973,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Turn on the AI Assistant channel or build a group for the assistants' referrers, and save a report on it.
 - **What changed in 12.0:** Updated: Google Analytics added an AI Assistant channel on 2026-05-13.
 - **Replaces:** BP-3
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-3 — Do you keep your crawler logs long enough to use them?
 
@@ -1993,7 +1993,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Keep at least a year of access logs in a store you can query.
 - **What changed in 12.0:** Detection and bands unchanged.
 - **Replaces:** BP-5
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-4 — Do you get a regular report on AI crawler visits?
 
@@ -2014,7 +2014,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Schedule a report on AI crawler requests, and send it to a person.
 - **What changed in 12.0:** Reframed: Google's Crawl Stats covers only Googlebot.
 - **Replaces:** BP-6
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-5 — Do you ask AI assistants the same questions every month and keep the answers?
 
@@ -2035,7 +2035,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Write the panel down, run it monthly and keep every answer.
 - **What changed in 12.0:** Reframed: Google cautions about third-party AI measurements.
 - **Replaces:** BP-7
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-6 — Have you measured how accurately an AI reads your page?
 
@@ -2056,7 +2056,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Pick the key pages and questions, score the answers now, and again after each round of fixes.
 - **What changed in 12.0:** Reframed.
 - **Replaces:** BP-8
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-7 — Are you set up in Google Search Console and Bing Webmaster Tools, and do you read their AI reports?
 
@@ -2077,7 +2077,7 @@ Numbered within this section, for the same reason the extras are.
 - **Fix:** Verify both, submit the sitemaps, and route the alerts and AI reports to a person.
 - **What changed in 12.0:** Adds Bing's AI Performance report and Google's generative AI report.
 - **Replaces:** BP-9
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ### MSR-8 — Does your page hold still while it loads?
 
@@ -2097,7 +2097,7 @@ Numbered within this section, for the same reason the extras are.
 - **Note:** Shown and never scored: it is one lab reading from one load, which varies between loads, and no AI product is documented reading it.
 - **Fix:** Give images and embeds a width and height, reserve room for banners and late content, and do not insert content above what a visitor is looking at.
 - **What changed in 12.0:** New test. No points.
-- **Review by:** 2027-05-02
+- **Review by:** 2027-04-18
 
 ## Retired tests
 
@@ -2227,7 +2227,7 @@ Never silently re-weight. A client's trend line is the most valuable thing the I
 
 ### Changelog
 
-#### 12.0 — 2026-11-02
+#### 12.0 — 2026-10-18
 
 **A MAJOR bump. Scores computed under Index 12 cannot be compared with scores computed under Index 11, in either direction.** Every weight moved, the structure of the score changed, 38 tests carry the hundred points where 51 did, and every test has a new ID. A site that scored 70 under 11.5 and scores 70 under 12.0 has not stayed the same: the two numbers answer different questions. Every site's trend line carries one marker, *Index changed from 11.5 to 12.0*, and benchmarks compare only sites within a major version.
 

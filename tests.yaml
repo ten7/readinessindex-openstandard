@@ -16,7 +16,7 @@ index_version: "12.0"
 # The day this version took effect. Every result carries both, so an
 # old report cannot silently start meaning something new when the
 # Index changes underneath it.
-index_date: "2026-11-02"
+index_date: "2026-10-18"
 
 # Four scored categories. Posture, Extras and Measurement are reported beside
 # them and never scored: a test with a `tier` of posture, extras or measurement.
