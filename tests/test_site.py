@@ -117,7 +117,7 @@ def test_every_page_has_one_h1_a_canonical_and_no_third_party_resource(out: Path
 def test_the_site_says_it_is_a_standard_and_names_ten7_and_its_product(out: Path) -> None:
     for page in PAGES:
         html = read(out, page)
-        assert "An open standard" in html, page
+        assert "Open standard by TEN7" in html, page
         assert 'href="https://ten7.com"' in html and 'href="https://readinessindex.io"' in html, page
         assert "a product of ten7" in html.lower(), page
         assert "commercial business" not in html and "for-profit" not in html, page
