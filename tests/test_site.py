@@ -148,3 +148,41 @@ def test_every_anchor_the_scanner_site_links_to_exists(out: Path) -> None:
 def test_the_old_scanner_site_anchors_are_translated_in_the_script(out: Path) -> None:
     script = (out / "assets" / "site.js").read_text(encoding="utf-8")
     assert "(?:c|row)-" in script and "d-(" in script
+
+
+def test_the_icon_is_an_orange_square_in_every_format_a_browser_asks_for(out: Path) -> None:
+    import struct
+    import zlib
+
+    svg = (out / "assets" / "favicon.svg").read_text(encoding="utf-8")
+    assert 'fill="#fb9d61"' in svg and 'x="16" y="16" width="32" height="32"' in svg
+
+    def pixels(data: bytes) -> tuple[int, list[bytes]]:
+        assert data[:8] == b"\x89PNG\r\n\x1a\n"
+        width, _ = struct.unpack(">II", data[16:24])
+        idat = b"".join(data[i + 8:i + 8 + n] for i, n in
+                        ((j, struct.unpack(">I", data[j:j + 4])[0]) for j in range(8, len(data) - 12)
+                         if data[j + 4:j + 8] == b"IDAT"))
+        raw = zlib.decompress(idat)
+        stride = width * 4 + 1
+        return width, [raw[y * stride + 1:(y + 1) * stride] for y in range(width)]
+
+    width, rows = pixels((out / "assets" / "favicon-32.png").read_bytes())
+    assert rows[width // 2][(width // 2) * 4:(width // 2) * 4 + 4] == bytes((0xFB, 0x9D, 0x61, 255))
+    assert rows[0][0:4] == bytes((0, 0, 0, 0)), "the corner is transparent"
+    assert rows[width // 4 - 1][(width // 4 - 1) * 4 + 3] == 0 and rows[width // 4][(width // 4) * 4 + 3] == 255, \
+        "the square starts a quarter in: half the icon's width, centered"
+    ico = (out / "favicon.ico").read_bytes()
+    assert ico[:4] == b"\x00\x00\x01\x00" and struct.unpack("<H", ico[4:6])[0] == 3
+    assert (out / "apple-touch-icon.png").read_bytes()[:4] == b"\x89PNG"
+    for page in PAGES:
+        html = read(out, page)
+        assert 'href="/favicon.ico"' in html and 'rel="apple-touch-icon"' in html, page
+
+
+def test_the_site_is_light_only(out: Path) -> None:
+    css = (out / "assets" / "site.css").read_text(encoding="utf-8")
+    assert "prefers-color-scheme" not in css
+    assert "color-scheme: light;" in css
+    for page in PAGES:
+        assert '<meta name="color-scheme" content="light">' in read(out, page), page

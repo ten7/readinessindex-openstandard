@@ -1,4 +1,4 @@
-/* The Open Standard site.
+/* The Open Standard site. Light only, always: there is no dark theme to maintain or to drift.
 
    A specification should read like one: paper, ink, a measure a person can read
    for an hour, and one accent used sparingly. Nothing here is borrowed from a
@@ -6,6 +6,7 @@
    there is nothing to download and nothing to track. */
 
 :root {
+  color-scheme: light;
   --paper: #fbfaf6;
   --paper-2: #f3f0e7;
   --paper-3: #e9e4d6;
@@ -39,29 +40,6 @@
   --measure: 40rem;
   --wide: 74rem;
   --gutter: clamp(1rem, 4vw, 2rem);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #14161a;
-    --paper-2: #1b1e23;
-    --paper-3: #252930;
-    --ink: #ecebe6;
-    --ink-2: #cfcdc6;
-    --muted: #9a9ea6;
-    --rule: #333740;
-    --rule-2: #272b32;
-    --accent: #fb9d61;
-    --accent-ink: #fdb689;
-    --accent-wash: #33241a;
-    --foot-bg: #0e1013;
-    --chip-strong-fg: #8fd1b0;  --chip-strong-bg: #1b2e26;
-    --chip-practice-fg: #9ebbe6; --chip-practice-bg: #1c2636;
-    --chip-weak-fg: #e6c57a;     --chip-weak-bg: #33290f;
-    --chip-none-fg: #b4b7bd;     --chip-none-bg: #262a30;
-    --seg-1: #262a30; --seg-2: #333843; --seg-3: #4b5160; --seg-4: #747c8f;
-    --seg-1-fg: #ecebe6; --seg-2-fg: #ecebe6; --seg-3-fg: #ecebe6; --seg-4-fg: #0e1013;
-  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }

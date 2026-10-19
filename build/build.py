@@ -25,7 +25,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
-from . import data, spec, specdata
+from . import data, favicon, spec, specdata
 
 ROOT = spec.ROOT
 HERE = Path(__file__).resolve().parent
@@ -261,6 +261,9 @@ def build(out: Path) -> list[str]:
     (out / "404.html").write_text(html404, encoding="utf-8")
 
     # ---- machine-readable files
+    (out / "favicon.ico").write_bytes(favicon.ico())
+    (out / "assets" / "favicon-32.png").write_bytes(favicon.png(32))
+    (out / "apple-touch-icon.png").write_bytes(favicon.png(180, background=(0xFB, 0xFA, 0xF6)))
     (out / "standard.md").write_text(spec_text, encoding="utf-8")
     shutil.copy(ROOT / "tests.yaml", out / "tests.yaml")
     shutil.copy(ROOT / "crosswalk.yaml", out / "crosswalk.yaml")
