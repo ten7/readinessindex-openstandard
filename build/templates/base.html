@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.className = "";</script>
+{#- Google Tag Manager, on every page. The container is the one the product site uses, so it reads the same
+    three data layer values: the page's address without a query string or fragment, the referrer's, and the
+    audience. This site has no sign-in, so the audience is always anonymous; the container's Google tag
+    overrides page_location with page_location_clean, and without these it would send a hit with no address. #}
+<script>
+(function(){var loc=location.origin+location.pathname,ref='';
+try{if(document.referrer){var r=new URL(document.referrer);ref=r.origin+r.pathname;}}catch(e){}
+window.dataLayer=window.dataLayer||[];
+window.dataLayer.push({page_location_clean:loc,page_referrer_clean:ref,audience:'anonymous'});})();
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ gtm_id }}');</script>
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ base }}{{ path }}">
@@ -25,6 +36,7 @@
 <script src="/assets/site.js?v={{ asset_v }}" defer></script>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a class="skip" href="#content">Skip to the content</a>
 {% block progress %}{% endblock %}
 <header class="masthead">
@@ -98,7 +110,6 @@
     <div class="foot__legal">
       <span>Version {{ version }} · effective {{ date_human }}</span>
       <span>Text and data: CC BY-SA 4.0</span>
-      <span>No cookies, no analytics.</span>
     </div>
   </div>
 </footer>

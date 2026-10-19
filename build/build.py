@@ -28,6 +28,8 @@ from markupsafe import Markup
 from . import data, favicon, spec, specdata
 
 ROOT = spec.ROOT
+#: The Google Tag Manager container, the same one the product site runs.
+GTM_CONTAINER = "GTM-MK9GXR55"
 HERE = Path(__file__).resolve().parent
 BASE = "https://openstandard.readinessindex.io"
 REPO = "https://github.com/ten7/readinessindex-openstandard"
@@ -164,7 +166,7 @@ def build(out: Path) -> list[str]:
     env.globals.update(
         base=BASE, repo=REPO, nav=NAV, version=version, date_human=human_date(date), date_short=short_date(date), asset_v=asset_v,
         n_tests=len(tests), n_scored=len(data.scored()), n_beside=len(tests) - len(data.scored()),
-        tones=data.EVIDENCE_TONE, jsonld="")
+        tones=data.EVIDENCE_TONE, jsonld="", gtm_id=GTM_CONTAINER)
     pages: list[str] = []
 
     def page(path: str, template: str, **ctx: Any) -> None:

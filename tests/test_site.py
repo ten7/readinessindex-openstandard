@@ -186,3 +186,28 @@ def test_the_site_is_light_only(out: Path) -> None:
     assert "color-scheme: light;" in css
     for page in PAGES:
         assert '<meta name="color-scheme" content="light">' in read(out, page), page
+
+
+def test_every_page_carries_the_tag_manager_container_after_the_data_layer(out: Path) -> None:
+    """The container reads page_location_clean, so the push has to come first or the Google tag sends a hit
+    with no address. The 404 page counts: a missing page is a page somebody reached."""
+    for page in [*PAGES, "/404.html"]:
+        html = read(out, page)
+        assert html.count(site_build.GTM_CONTAINER) == 2, f"{page}: the script and the noscript frame"
+        push = html.index("page_location_clean")
+        assert push < html.index("googletagmanager.com/gtm.js"), page
+        assert "audience:'anonymous'" in html and "page_referrer_clean" in html, page
+        assert f"ns.html?id={site_build.GTM_CONTAINER}" in html, page
+        assert html.index("<noscript>") < html.index('class="skip"'), f"{page}: the frame opens the body"
+
+
+def test_the_site_no_longer_claims_it_has_no_analytics_or_no_cookies(out: Path) -> None:
+    # The site's own chrome and its privacy note. The document itself says "no analytics" in a band
+    # definition (a site with none scores 0), which is about other people's sites.
+    for page in [*PAGES, "/404.html"]:
+        html = read(out, page)
+        footer = html[html.index("<footer"):].lower()
+        assert "no analytics" not in footer and "no cookies" not in footer, page
+    about = read(out, "/about/").lower()
+    assert "no analytics" not in about and "no cookies" not in about
+    assert "Google Tag Manager" in read(out, "/about/")
