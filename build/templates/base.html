@@ -48,6 +48,7 @@ window.dataLayer.push({page_location_clean:loc,page_referrer_clean:ref,audience:
     <nav class="nav" aria-label="Primary">
       {% for item in nav %}<a href="{{ item.href }}"{% if item.id == page_id %} aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
       <a class="nav__ext" href="{{ repo }}">GitHub</a>
+      <a class="nav__ext" href="https://readinessindex.io" target="_blank" rel="noopener">readinessindex.io<span class="sr-only"> (opens in a new tab)</span></a>
     </nav>
   </div>
 </header>
@@ -90,6 +91,7 @@ window.dataLayer.push({page_location_clean:loc,page_referrer_clean:ref,audience:
           <li><a href="/about/">About this standard</a></li>
           <li><a href="/about/#license">License: CC BY-SA 4.0</a></li>
           <li><a href="/about/#provenance">Who made it</a></li>
+          <li><a class="ext" href="https://readinessindex.io" target="_blank" rel="noopener">readinessindex.io<span class="sr-only"> (opens in a new tab)</span></a></li>
         </ul>
       </div>
     </div>
