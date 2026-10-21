@@ -4,7 +4,7 @@ A public standard for whether machines can find, read, trust and use a website. 
 
 Read it at **[openstandard.readinessindex.io](https://openstandard.readinessindex.io)**.
 
-- **Version 12.0**, effective 2026-10-18.
+- **Version 12.1**, effective 2026-10-21.
 - Licensed **[CC BY-SA 4.0](LICENSE)** (see also [NOTICE.md](NOTICE.md)): copy it, adapt it, build a scanner from it, for any purpose, as long as you credit TEN7 as the creator of the AI Readiness Index and license what you build the same way.
 - Created by [TEN7](https://ten7.com). This repository is the standard, not a product. Scanners that implement it, including TEN7's own product, [readinessindex.io](https://readinessindex.io), are separate software and are not part of it.
 

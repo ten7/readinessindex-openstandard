@@ -11,12 +11,12 @@
 # License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), see LICENSE.
 # Scanners that read this file are separate software and are not part of the standard.
 
-index_version: "12.0"
+index_version: "12.1"
 
 # The day this version took effect. Every result carries both, so an
 # old report cannot silently start meaning something new when the
 # Index changes underneath it.
-index_date: "2026-10-18"
+index_date: "2026-10-21"
 
 # Four scored categories. Posture, Extras and Measurement are reported beside
 # them and never scored: a test with a `tier` of posture, extras or measurement.
@@ -152,7 +152,7 @@ checks:
     unattested_ceiling: null
 
   - id: RED-5
-    title: "Do your PDFs and images have their own rules for search and quoting?"
+    title: "Is any PDF or image you publish kept out of search by a header?"
     dimension: 2
     weight: 1
     applicability: conditional
@@ -365,8 +365,8 @@ checks:
     title: "Does your site say clearly who you are?"
     dimension: 3
     weight: 2
-    applicability: always
-    precondition: null
+    applicability: conditional
+    precondition: site_publisher_is_organization
     requires: null
     verification: auto
     effort: medium
@@ -491,8 +491,8 @@ checks:
     title: "Does your page code link to your official profiles elsewhere?"
     dimension: 3
     weight: 2
-    applicability: always
-    precondition: null
+    applicability: conditional
+    precondition: site_publisher_is_organization
     requires: null
     verification: auto
     effort: small

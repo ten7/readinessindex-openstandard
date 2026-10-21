@@ -1,7 +1,7 @@
 # The AI Readiness Index
 
-**Version 12.0 — specification**
-Effective 2026-10-18.
+**Version 12.1 — specification**
+Effective 2026-10-21.
 Repository: [ten7/readinessindex-openstandard](https://github.com/ten7/readinessindex-openstandard)
 
 **License:** This document and the tests it defines are published under
@@ -325,7 +325,7 @@ The scanner writes one `result.json` per run. Everything else (Markdown report, 
 ```json
 {
   "schema_version": "1.0",
-  "index_version": "12.0",
+  "index_version": "12.1",
   "site": {
     "name": "Example University",
     "base_url": "https://example.edu",
@@ -685,23 +685,25 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Replaces:** AIR-4.7
 - **Review by:** 2027-04-18
 
-### RED-5 — Do your PDFs and images have their own rules for search and quoting?
+### RED-5 — Is any PDF or image you publish kept out of search by a header?
 
-- **Question:** Do your PDFs and images have their own rules for search and quoting?
+- **Question:** Is any PDF or image you publish kept out of search by a header?
 - **Points:** 1
 - **Applicability:** conditional — the site serves PDFs, documents, media or JSON endpoints
 - **Verification:** auto
 - **Effort:** small
 - **Fixed by:** Operations
 - **Evidence:** Search index
-- **Measures:** We check the X-Robots-Tag header on files that are not web pages.
+- **Measures:** We check the X-Robots-Tag header on files that are not web pages, and flag one that removes a file from search.
 - **Why this matters:** PDFs, images and JSON cannot carry a meta robots tag, so the instruction has to travel in the HTTP header instead. [Google, robots meta tag and X-Robots-Tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag): Google documents the header for files that cannot hold a tag, including the snippet controls that apply to its AI features.
 - **Sources:** [Google, robots meta tag and X-Robots-Tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag), 2026-03-24 (A)
-- **Detect:** HEAD every sampled PDF, document, media file and API endpoint. Record `X-Robots-Tag`. Flag `noindex` on substantive content and absent directives on endpoints that should be excluded.
+- **Detect:** HEAD every sampled PDF, document, media file and API endpoint. Record `X-Robots-Tag`. Flag `noindex`. A file with no header is not flagged.
 - **Evidence kept:** Per resource: the type, the header found and the flag raised.
-- **Bands:** 4 — every non-HTML type carries a deliberate, correct value. 2 — mixed or partial. 0 — absent everywhere, or substantive PDFs marked `noindex`.
-- **Fix:** Set headers by path pattern at the CDN or web server.
+- **Bands:** 4 — no sampled file is kept out of search by its header, including a site that sets none. 2 — some are and some are not. 0 — every sampled file is.
+- **Note:** No header is the default and means no restriction, so a site that sets none has done nothing wrong. Index 12.0 scored the absence as a problem; the harm this test exists to find is a `noindex` set by mistake on a PDF or image the site wants found.
+- **Fix:** Remove `noindex` from files you want found. Where a file should be kept out, set the header by path pattern at the CDN or web server.
 - **What changed in 12.0:** Detection and bands unchanged. Points: 1, unchanged from 11.5.
+- **What changed in 12.1:** A missing header no longer costs a point: no header means no restriction. The bands count the files that a `noindex` keeps out of search. Points: 1, unchanged.
 - **Replaces:** AIR-4.4
 - **Review by:** 2027-04-18
 
@@ -836,15 +838,16 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Measures:** We send a request that asks for Markdown, check the answer, and check that caches keep the web and Markdown versions apart.
 - **Why this matters:** A machine can ask the page's own address for Markdown and get it, with caches keeping the web and Markdown versions apart. [Cloudflare, Markdown for Agents (docs)](https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/): Cloudflare documents the request and its cache behavior, and reports which coding agents send it.
 - **Sources:** [Cloudflare, Markdown for Agents](https://developers.cloudflare.com/changelog/post/2026-02-12-markdown-for-agents/), 2026-02-12 (A); [Cloudflare, Markdown for Agents (docs)](https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/), 2026-10-09 (A); [Cloudflare, cache and Vary](https://developers.cloudflare.com/cache/concepts/vary/), 2026-08-14 (A)
-- **Detect:** Two halves. **Negotiation:** request sampled URLs with `Accept: text/markdown` and confirm the response type and that `Vary: Accept` is set. **Caching:** request through the CDN twice, once for each representation, and confirm the two variants are cached separately and that a browser is never served Markdown.
+- **Detect:** Two halves. **Negotiation:** request sampled URLs with `Accept: text/markdown` and confirm the response type and that `Vary: Accept` is set. **Caching:** request through the CDN twice, once for each representation, and confirm the two variants are cached separately and that a browser is never served Markdown. **Not applicable:** when no sampled address answers the request with Markdown and at least half of the sampled pages advertise a Markdown copy that matches the page, in a link tag or a `Link` header (RED-10, RED-11), the site hands a machine Markdown another way and the test leaves the score without lowering it.
 - **Evidence kept:** Per URL: response type, `Vary` header, cache-status headers and the variant returned to each request.
 - **Bands:** the weakest half decides the band.
   - **4** — negotiation works, `Vary: Accept` is correct and the variants are cached separately.
   - **2** — negotiation works but `Vary` is missing or the variants share a cache entry, which risks serving Markdown to browsers.
   - **0** — not supported.
-- **Note:** The evidence is for coding agents only: Cloudflare reports that they send the request, and one study of crawler logs saw no AI crawler do so. Getting `Vary` wrong is worse than not doing this at all. Verify at the edge.
+- **Note:** The evidence is for coding agents only: Cloudflare reports that they send the request, and one study of crawler logs saw no AI crawler do so. Getting `Vary` wrong is worse than not doing this at all. Verify at the edge. Asking the page's own address and advertising a copy at its own address are two ways to give a machine Markdown. The first is what Cloudflare documents; RED-10 and RED-11 score the second.
 - **Fix:** Serve Markdown on request from the canonical address, set `Vary: Accept`, and set TTLs and invalidation to the same cache tags as the source content.
 - **What changed in 12.0:** Absorbs the caching test. Points: 4 in 11.5, 2 in 12.0.
+- **What changed in 12.1:** A site that does not answer the Markdown request but advertises a Markdown copy that matches its pages is not applicable, where it scored band 0. A site that negotiates is judged as before. Points: 2, unchanged.
 - **Replaces:** AIR-7.3, AIR-7.4
 - **Review by:** 2027-04-18
 
@@ -922,12 +925,13 @@ Reach asks whether an AI system can get in. Read asks whether it can find the pa
 - **Measures:** We check that section headings have readable IDs, taken from the heading text, that a link can point to.
 - **Why this matters:** A section heading with a stable ID can be linked to directly, so a person or a tool can return to the same passage. [Google, control your snippets](https://developers.google.com/search/docs/appearance/snippet): It is the nearest primary source: it describes how Search shows part of a page, and no AI product is documented citing by anchor.
 - **Sources:** [Google, control your snippets](https://developers.google.com/search/docs/appearance/snippet), 2026-04-20 (A)
-- **Detect:** For headings below `h1`, check for an `id`. Classify each as slug-like (derived from heading text) or generated (`section-3`, `block-a7f2c1`, framework hashes). One scan is enough: a generated ID is the sign of one that will change, and the scanner does not compare scans.
+- **Detect:** For headings below `h1`, check for an `id`. Classify each as slug-like (derived from heading text) or generated (`section-3`, `block-a7f2c1`, framework hashes). One scan is enough: a generated ID is the sign of one that will change, and the scanner does not compare scans. An ID that is a word or number in the heading's own text counts as slug-like, so `2026` under "October 2026" passes.
 - **Evidence kept:** Per heading: the ID found and its class.
 - **Bands:** 4 — ≥95% of subheadings carry slug-like IDs. 3 — 75–94%. 2 — IDs present but a majority are generated. 1 — sparse. 0 — none.
 - **Note:** Labeled Practice: sound practice for people and for assistive technology, and no AI company documents using it. It carries one point. This is the weakest evidence in the category.
 - **Fix:** Derive IDs from heading text, not render order.
 - **What changed in 12.0:** The check that IDs stay the same across scans is dropped; it had no evidence. Points: 2 in 11.5, 1 in 12.0. The scanner reads one scan and does not compare IDs between runs.
+- **What changed in 12.1:** An ID that is a word or number in the heading's own text, such as a year, is no longer counted as generated. The summary separates a heading with an ID that is not taken from its text from one with no ID. Bands and points unchanged.
 - **Replaces:** AIR-2.4
 - **Review by:** 2027-04-18
 
@@ -1002,7 +1006,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 
 - **Question:** Does your site say clearly who you are?
 - **Points:** 2
-- **Applicability:** always
+- **Applicability:** conditional — the site is published by an organization, not by a person
 - **Verification:** auto
 - **Effort:** medium
 - **Fixed by:** Content team, Site owner
@@ -1010,12 +1014,13 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Measures:** We look for your name, address, contact details and public identifiers, such as a company or registry number, on your About page and in your page code.
 - **Why this matters:** Your name, address, contact details and public identifiers, on an About page and in your page code, so a machine can tell which organization you are. [Google, Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization): Google documents using these identifiers to tell organizations apart.
 - **Sources:** [Google, Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization), 2026-09-08 (A)
-- **Detect:** Locate About and Contact pages. Score presence of: organization name, founding date, leadership names, postal address, service area, `contactPoint` entries differentiated by purpose, and public legal identifiers (EIN, ROR, DUNS, company or registry number). Check both the visible page and the `Organization` node.
+- **Detect:** Locate About and Contact pages. Score presence of: organization name, founding date, leadership names, postal address, service area, `contactPoint` entries differentiated by purpose, and public legal identifiers (EIN, ROR, DUNS, company or registry number). Check both the visible page and the `Organization` node. **Not applicable** when the site is a person's: the only person it names has a name that reads as a person's, and every `Organization` on it carries that same name (a publisher that is only the author's own name); or it has no `Organization` and its `publisher` or `copyrightHolder` is a `Person` with such a name. The authors of individual posts do not decide this, because a company's posts have `Person` authors too, and neither does an organization typed as its own byline.
 - **Evidence kept:** Per fact: whether it appears in the visible page, in the `Organization` node, or both.
 - **Bands:** fraction of those seven facts present in both HTML and markup: 4 — ≥6. 3 — 5. 2 — 3–4. 1 — 1–2. 0 — none.
 - **Note:** This release reads the `Organization` node. Whether each fact also appears in the visible page is not yet compared, so a fact counts when the markup carries it.
 - **Fix:** Thin About pages are a persistent weakness for nonprofits and institutions. Do not leave the key facts in an annual-report PDF.
 - **What changed in 12.0:** Cites Google's Organization documentation. Points: 2, unchanged from 11.5. The list of facts now names all seven the bands count; 11.5 listed six and banded on seven.
+- **What changed in 12.1:** Not applicable on a site that is a person's, where it scored 0 of 7. A site that names an organization is scored as before. Points: 2, unchanged.
 - **Replaces:** AIR-1.13
 - **Review by:** 2027-04-18
 
@@ -1204,7 +1209,7 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 
 - **Question:** Does your page code link to your official profiles elsewhere?
 - **Points:** 2
-- **Applicability:** always
+- **Applicability:** conditional — the site is published by an organization, not by a person
 - **Verification:** auto
 - **Effort:** small
 - **Fixed by:** Search specialist, Back-end developer
@@ -1212,12 +1217,13 @@ Understand asks whether a machine knows what a page and a site are: who publishe
 - **Measures:** We look for links to profiles such as Wikidata and LinkedIn in your organization's page code.
 - **Why this matters:** Links from your organization's page code to your official profiles, such as Wikidata and LinkedIn. [Google, Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization): Google lists `sameAs` as a recommended property of Organization markup, which is a documented reader.
 - **Sources:** [Google, Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization), 2026-09-08 (A)
-- **Detect:** Extract `sameAs` from `Organization` and `Person` nodes. Classify each URL by authority: tier 1 (Wikidata, ROR, NPI, IRS EIN, ORCID), tier 2 (Wikipedia, Crunchbase, LinkedIn, Candid), tier 3 (social profiles). Where the links can be fetched, resolve each URL and confirm it returns `200` and references the organization back where possible, under *Resolving external identifiers*. A scan that does not fetch them grades the links as published.
+- **Detect:** Extract `sameAs` from `Organization` and `Person` nodes. Classify each URL by authority: tier 1 (Wikidata, ROR, NPI, IRS EIN, ORCID), tier 2 (Wikipedia, Crunchbase, LinkedIn, Candid), tier 3 (social profiles). Where the links can be fetched, resolve each URL and confirm it returns `200` and references the organization back where possible, under *Resolving external identifiers*. A scan that does not fetch them grades the links as published. **Not applicable (see UND-1)** when the site is a person's: the only person it names has a name that reads as a person's, and every `Organization` on it carries that same name (a publisher that is only the author's own name); or it has no `Organization` and its `publisher` or `copyrightHolder` is a `Person` with such a name. The authors of individual posts do not decide this, because a company's posts have `Person` authors too, and neither does an organization typed as its own byline. Google's Article documentation says `sameAs` is an alternative to an author's `url` and that it "can understand both" when disambiguating authors, so a `Person` with a `url` is not asked for more.
 - **Evidence kept:** Each link, its tier, whether it was resolved and what came back, and the external hosts contacted.
 - **Bands:** 4 — a tier-1 identifier among three or more links, none known to be dead. The links need not have been fetched. 3 — a tier-1 identifier with fewer than three links, or a link known to be dead. 2 — tier-2 links and no tier-1. 1 — social profiles only. 0 — no `sameAs`.
 - **Note:** Band 4 does not wait for the links to be fetched. Those hosts are often outside the client's allowlist, and a permanent ceiling at band 3 would have taken points from every site however good, which a scored test must not do. When the links were not fetched, the confidence is medium and the summary says so. A scan that did fetch them still lowers the band for a link that is dead.
 - **Fix:** Claim the Wikidata item. For universities, ROR is free and takes a day.
 - **What changed in 12.0:** It was unscored in the first 12.0 draft and moved into the score as an Understand test, at 2 points, because Google documents `sameAs` as a recommended Organization property. It carried 2 points in 11.5 as AIR-1.12. Band 4 no longer needs the links fetched.
+- **What changed in 12.1:** Not applicable on a site that is a person's. Google's Article documentation treats an author's `url` and `sameAs` as alternatives for telling authors apart, so a `Person` with a `url` needs no `sameAs`. Points: 2, unchanged.
 - **Replaces:** AIR-1.12
 - **Review by:** 2027-04-18
 
@@ -2226,6 +2232,18 @@ A test ID is never reused for another test, and the crosswalk is permanent.
 Never silently re-weight. A client's trend line is the most valuable thing the Index produces, and one quiet weight change destroys it. When a major bump lands, re-score the last run under both versions and show the difference.
 
 ### Changelog
+
+#### 12.1 — 2026-10-21
+
+**A minor bump: corrected detection in five tests. No weight, gate or scoring model changed, and a site's score under 12.1 is within a few points of its score under 12.0.** The scores are comparable, not identical. The five changes below came from a review of one personal site against the standard, and each is a place where a test scored a site down for something it did not get wrong.
+
+1. **RED-5 no longer scores a missing header as a problem.** No `X-Robots-Tag` means no restriction, which is the default. The test now finds the harm it was for: a `noindex` on a PDF, image or document the site wants found. A site that sets no header earns the point. The question is reworded to say so.
+2. **RED-12 is not applicable for a site that gives Markdown another way.** A site that does not answer `Accept: text/markdown` but advertises a Markdown copy that matches at least half of the pages sampled, in a link tag or a `Link` header, scored band 0. It now leaves the score, because RED-10 and RED-11 already score that route and the documented use of the request is by coding agents only. A site that negotiates is judged as before.
+3. **RED-16 counts an ID taken from the heading's own words.** The year anchors on a blog index (`2026` under "October 2026") were counted as generated because they are digits. An ID that is a word or number in its heading is slug-like, and the summary now separates a heading with an ID that is not taken from its text from one with none.
+4. **UND-1 is not applicable on a personal site.** It asked a person's site for a founding date, leadership and a legal identifier. A site is a person's when the only person it names has a name that reads as a person's and every organization it names carries that same name, or it names such a person as its publisher and no organization. A post's author does not decide it, so a company that leaves out its organization markup is still scored, and neither does an organization typed as its own byline.
+5. **UND-10 is not applicable on a personal site.** Google's Article documentation treats an author's `url` and `sameAs` as alternatives. The author tests read the author.
+
+Re-score a site's last run under both versions before comparing them.
 
 #### 12.0 — 2026-10-18
 

@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use or implement this standard, please cite it."
 title: "The AI Readiness Index: an open standard"
-version: "12.0"
-date-released: "2026-10-18"
+version: "12.1"
+date-released: "2026-10-21"
 license: CC-BY-SA-4.0
 url: "https://openstandard.readinessindex.io"
 repository-code: "https://github.com/ten7/readinessindex-openstandard"
